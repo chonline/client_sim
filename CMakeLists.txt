@@ -70,8 +70,21 @@ endif()
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 
-# Qt 6 (optional for M1, required for M2+)
+# Qt 6 (optional for M1, required for M2+).
+# The app/ UI sub-project is built only when Qt6 with Widgets is
+# available, so wzlib + tests + tools still build cleanly on machines
+# without Qt.
 find_package(Qt6 6.5 QUIET)
+if(Qt6_FOUND AND TARGET Qt6::Widgets)
+    set(CLIENT_SIM_HAVE_QT6 TRUE)
+    message(STATUS "Qt6 with Widgets found - building client_sim UI")
+    add_subdirectory(app)
+else()
+    set(CLIENT_SIM_HAVE_QT6 FALSE)
+    message(STATUS
+        "Qt6 (with Widgets) not found - skipping client_sim UI "
+        "(wzlib + tests + tools only)")
+endif()
 
 # ----------------------------------------------------------------------------
 # Sub-projects
@@ -96,7 +109,7 @@ message(STATUS "  Build type      : ${CMAKE_BUILD_TYPE}")
 message(STATUS "  C++ compiler    : ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "  OpenSSL         : ${OPENSSL_VERSION} (${OPENSSL_INCLUDE_DIR})")
 message(STATUS "  zlib            : ${ZLIB_VERSION_STRING}")
-message(STATUS "  Qt6             : ${Qt6_VERSION} (found: ${Qt6_FOUND})")
+message(STATUS "  Qt6 (Widgets)   : ${CLIENT_SIM_HAVE_QT6}")
 message(STATUS "  Build tests     : ${CLIENT_SIM_BUILD_TESTS}")
 message(STATUS "  Build tools     : ${CLIENT_SIM_BUILD_TOOLS}")
 message(STATUS "  ASan / UBSan    : ${CLIENT_SIM_USE_ASAN} / ${CLIENT_SIM_USE_UBSAN}")
