@@ -25,6 +25,7 @@ namespace wzlib {
 
 class WzBinaryReader;
 class WzCryptoContext;
+class WzFile;
 
 /**
  * @brief A WZ image block (.img).
@@ -73,6 +74,10 @@ public:
      */
     const std::vector<uint8_t>& raw() const { return raw_; }
 
+    /** @brief Owning WzFile, or nullptr if not attached. */
+    WzFile* file() const { return file_; }
+    void setFile(WzFile* f) { file_ = f; }
+
 private:
     int64_t offset_ = 0;
     int32_t size_   = 0;
@@ -80,6 +85,7 @@ private:
     bool extracted_ = false;
     std::vector<uint8_t> raw_;     // Decompressed but unparsed.
     WzNode root_;                  // Root of the property tree (empty name).
+    WzFile* file_ = nullptr;
 
     /**
      * @brief Internal helper: parse the property list starting at `pos`.

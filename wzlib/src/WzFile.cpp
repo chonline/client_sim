@@ -84,6 +84,7 @@ void WzFile::indexImages(WzDirectory* dir, const std::string& prefix) {
             auto img = std::make_unique<WzImage>(child->offset(),
                                                   child->size(),
                                                   child->cs32());
+            img->setFile(this);
             images_[path] = std::move(img);
         } else {
             indexImages(child.get(), path);
