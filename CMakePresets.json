@@ -1,0 +1,95 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "_base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "linux-debug",
+            "displayName": "Linux GCC Debug",
+            "inherits": "_base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_C_COMPILER": "gcc"
+            }
+        },
+        {
+            "name": "linux-release",
+            "displayName": "Linux GCC Release",
+            "inherits": "_base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_C_COMPILER": "gcc"
+            }
+        },
+        {
+            "name": "linux-asan",
+            "displayName": "Linux GCC Debug + ASan",
+            "inherits": "linux-debug",
+            "cacheVariables": {
+                "CLIENT_SIM_USE_ASAN": "ON",
+                "CLIENT_SIM_USE_UBSAN": "ON"
+            }
+        },
+        {
+            "name": "macos-debug",
+            "displayName": "macOS Clang Debug",
+            "inherits": "_base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_C_COMPILER": "clang"
+            }
+        },
+        {
+            "name": "macos-release",
+            "displayName": "macOS Clang Release",
+            "inherits": "_base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_C_COMPILER": "clang"
+            }
+        },
+        {
+            "name": "windows-debug",
+            "displayName": "Windows MSVC Debug",
+            "inherits": "_base",
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "windows-release",
+            "displayName": "Windows MSVC Release",
+            "inherits": "_base",
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        { "name": "linux-debug",   "configurePreset": "linux-debug" },
+        { "name": "linux-release", "configurePreset": "linux-release" },
+        { "name": "linux-asan",    "configurePreset": "linux-asan" },
+        { "name": "macos-debug",   "configurePreset": "macos-debug" },
+        { "name": "macos-release", "configurePreset": "macos-release" },
+        { "name": "windows-debug", "configurePreset": "windows-debug" },
+        { "name": "windows-release", "configurePreset": "windows-release" }
+    ]
+}

@@ -1,0 +1,3 @@
+add_executable(test_wz_binary_reader main.cpp)
+target_link_libraries(test_wz_binary_reader PRIVATE wzlib wztest)
+add_test(NAME test_wz_binary_reader COMMAND test_wz_binary_reader)

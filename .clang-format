@@ -1,0 +1,67 @@
+---
+Language: Cpp
+Standard: c++17
+
+BasedOnStyle: Chromium
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+AccessModifierOffset: -1
+NamespaceIndentation: None
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+SortIncludes: true
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex:           '^<.*\.h>'
+    Priority:        1
+  - Regex:           '^<.*'
+    Priority:        2
+  - Regex:           '.*'
+    Priority:        3
+
+PointerAlignment: Left
+ReferenceAlignment: Pointer
+
+BraceWrapping:
+  AfterClass:      true
+  AfterControlStatement: false
+  AfterEnum:       true
+  AfterFunction:   true
+  AfterNamespace:  true
+  AfterStruct:     true
+  AfterUnion:      true
+  BeforeCatch:     false
+  BeforeElse:      false
+  IndentBraces:    false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+Spaces:
+  BeforeParens: ControlStatements
+  InParentheses: false
+  AfterCStyleCast: false
+
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AlignOperands:   true
+AlignTrailingComments: true
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+
+ReflowComments: true
+CommentPragmas: '[^ ]'
+
+# Force pointers to the type for C++
+DerivePointerAlignment: false

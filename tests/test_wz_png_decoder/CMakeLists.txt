@@ -1,0 +1,3 @@
+add_executable(test_wz_png_decoder main.cpp)
+target_link_libraries(test_wz_png_decoder PRIVATE wzlib wztest)
+add_test(NAME test_wz_png_decoder COMMAND test_wz_png_decoder)
